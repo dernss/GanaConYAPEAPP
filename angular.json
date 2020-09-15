@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "GanaConYAPEAPP"
+    }
+  },
+  "defaultProject": "GanaConYAPEAPP",
+  "cli": {
+    "analytics": "3e18852c-74c0-49dd-a992-65637d2f8ecb"
+  }
 }
