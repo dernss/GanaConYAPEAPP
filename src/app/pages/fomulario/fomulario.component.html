@@ -2,38 +2,81 @@
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button>
 <mat-vertical-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>COLABORADOR</ng-template>
+            <mat-form-field>
+                <mat-label>DNI Colaborador</mat-label>
+                <input type="TEXT" matInput placeholder="colaborador" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Datos Personales Cliente</ng-template>
+            <mat-form-field>
+                <mat-label>DNI Cliente</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="DNI" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Nombres</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Nombres" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Apellido Paterno</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ap. Paterno" required>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+                <mat-label>Apellido Materno</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ap. Materno" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Correo Electrónico</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Email" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Celular</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Celular" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Condicion</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Celular" required>
+
+                <br>
+                <mat-radio-button class="example-margin" value="after">Cliente</mat-radio-button>
+                &nbsp;
+                <mat-radio-button class="example-margin" value="before">Comercio</mat-radio-button>
+            </mat-form-field>
+            <br>
+
+
+
+
+
+
+
+            <mat-label>* El Cliente debe tener activo la opción de compras por internet</mat-label>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
 </mat-vertical-stepper>

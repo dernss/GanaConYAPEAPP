@@ -1,7 +1,8 @@
 .mat-stepper-vertical {
-  margin-top: 8px;
+    margin-top: 8px;
+    /*color: brown;*/
 }
 
 .mat-form-field {
-  margin-top: 16px;
+    margin-top: 16px;
 }

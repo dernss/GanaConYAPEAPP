@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +23,10 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     CommonModule,
     MatInputModule,
+    MatRadioModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatCheckboxModule,
     BrowserAnimationsModule
   ],
 

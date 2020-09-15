@@ -13,6 +13,11 @@ export class FomularioComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
+
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
