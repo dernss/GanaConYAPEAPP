@@ -14,7 +14,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
     CommonModule,
     MatIconModule,
     MatToolbarModule,
+    MatCardModule,
     MatInputModule,
     MatRadioModule,
     MatButtonModule,
