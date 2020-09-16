@@ -23,73 +23,71 @@
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>REGISTRO </ng-template>
-
-            <mat-label>COLABORADOR</mat-label>
-            <BR>
+            <h1 class="h1">COLABORADOR</h1>
             <mat-form-field>
                 <mat-label>DNI Colaborador</mat-label>
                 <input type="TEXT" matInput placeholder="colaborador" required>
             </mat-form-field>
-            <br>
-            <mat-label>DATOS PERSONALES CLIENTE</mat-label>
-            <BR>
+            <div>
+                &nbsp;
+            </div>
+            <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
             <mat-form-field>
                 <mat-label>DNI Cliente</mat-label>
-                <input matInput  name="dni" placeholder="DNI" required>
+                <input matInput name="dni" placeholder="DNI" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Nombres</mat-label>
-                <input matInput  name="nombres" placeholder="Nombres" required>
+                <input matInput name="nombres" placeholder="Nombres" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Apellido Paterno</mat-label>
-                <input matInput  name="apPaterno" placeholder="Ap. Paterno" required>
+                <input matInput name="apPaterno" placeholder="Ap. Paterno" required>
             </mat-form-field>
             &nbsp;
             <mat-form-field>
                 <mat-label>Apellido Materno</mat-label>
-                <input matInput  name="apMaterno" placeholder="Ap. Materno" required>
+                <input matInput name="apMaterno" placeholder="Ap. Materno" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Correo Electrónico</mat-label>
-                <input matInput  name="email" placeholder="Email" required>
+                <input matInput name="email" placeholder="Email" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Celular</mat-label>
-                <input matInput  name="celular" placeholder="Celular" required>
+                <input matInput name="celular" placeholder="Celular" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Condición</mat-label>
                 <input matInput>
-
                 <br>
-                <mat-radio-button class="example-margin" name="rbcliente" value="after">Cliente</mat-radio-button>
+                <mat-radio-button class="example-margin" name="rbcliente" value="1">Cliente</mat-radio-button>
                 &nbsp;
-                <mat-radio-button class="example-margin" name="rbcomercio" value="before">Comercio</mat-radio-button>
+                <mat-radio-button class="example-margin" name="rbcliente" value="2">Comercio</mat-radio-button>
             </mat-form-field>
             <br>
-
-
-
-
-
-
-
             <mat-label>* El Cliente debe tener activo la opción de compras por internet</mat-label>
             <br>
-            <!-- <div>
-                <button mat-raised-button color="WARN" (click)="stepper.reset()">Limpiar</button> &nbsp;
-            </div> -->
+            <div>
+                &nbsp;
+            </div>
             <div>
                 <!-- <button mat-button matStepperPrevious>Back</button> -->
 
-                <button mat-raised-button color="primary" (click)="enviar()">ENVIAR</button>
+                <button mat-raised-button color="primary" (click)="enviar()" class="casilla">ENVIAR</button>
             </div>
+            <div>
+                &nbsp;
+            </div>
+            <div>
+                <img mat-card-image SRC="assets\IMG\caja-cusco-imagen2.png">
+            </div>
+
         </form>
     </mat-step>
 
