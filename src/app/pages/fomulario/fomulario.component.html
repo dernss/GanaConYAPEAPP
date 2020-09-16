@@ -1,22 +1,38 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+<p>
+    <mat-toolbar color="primary">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+        <span>GANA CON YAPE</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+</p>
+
+
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
+</button> -->
 <mat-vertical-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>COLABORADOR</ng-template>
+
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>REGISTRO </ng-template>
+
+            <mat-label>COLABORADOR</mat-label>
+            <BR>
             <mat-form-field>
                 <mat-label>DNI Colaborador</mat-label>
                 <input type="TEXT" matInput placeholder="colaborador" formControlName="firstCtrl" required>
             </mat-form-field>
-            <div>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Datos Personales Cliente</ng-template>
+            <br>
+            <mat-label>DATOS PERSONALES CLIENTE</mat-label>
+            <BR>
             <mat-form-field>
                 <mat-label>DNI Cliente</mat-label>
                 <input matInput formControlName="secondCtrl" placeholder="DNI" required>
@@ -48,8 +64,8 @@
             </mat-form-field>
             <br>
             <mat-form-field>
-                <mat-label>Condicion</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Celular" required>
+                <mat-label>Condición</mat-label>
+                <input matInput>
 
                 <br>
                 <mat-radio-button class="example-margin" value="after">Cliente</mat-radio-button>
@@ -65,18 +81,16 @@
 
 
             <mat-label>* El Cliente debe tener activo la opción de compras por internet</mat-label>
+            <br>
+            <!-- <div>
+                <button mat-raised-button color="WARN" (click)="stepper.reset()">Limpiar</button> &nbsp;
+            </div> -->
             <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <!-- <button mat-button matStepperPrevious>Back</button> -->
+
+                <button mat-raised-button color="primary">ENVIAR</button>
             </div>
         </form>
     </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
-    </mat-step>
+
 </mat-vertical-stepper>

@@ -11,6 +11,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -22,8 +26,11 @@ import {MatRadioModule} from '@angular/material/radio';
     MatStepperModule,
     FormsModule,
     CommonModule,
+    MatIconModule,
+    MatToolbarModule,
     MatInputModule,
     MatRadioModule,
+    MatButtonModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatCheckboxModule,
