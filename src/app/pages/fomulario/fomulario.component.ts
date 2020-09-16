@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { FormularioService } from '../../services/formulario.service';
+import { GanaConYAPE } from '../../Model/formulario';
 
 
 @Component({
@@ -10,31 +11,31 @@ import { FormularioService } from '../../services/formulario.service';
 })
 export class FomularioComponent implements OnInit {
 
+  public model: GanaConYAPE = new GanaConYAPE();
+
   isLinear = false;
   firstFormGroup: FormGroup;
   request: any;
   listaEnvio: any[];
+
+
+  dni: string;
 
   checked = false;
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
 
-  constructor(private formBuilder: FormBuilder,
-              private apiService: FormularioService) {
-                this.request = {};
-                this.apiService.listaprueba()
-                    .subscribe(resultado => {this.listaEnvio = resultado.data; });
-              }
+  constructor(private formBuilder: FormBuilder){}
 
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      this.firstFormGroup = this.formBuilder.group({
+
     });
   }
-  
+
   enviar(){
-    console.log(this.checked);
+    console.log(this.firstFormGroup.value);
   }
 
 
