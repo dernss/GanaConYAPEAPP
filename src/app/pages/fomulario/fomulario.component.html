@@ -20,8 +20,8 @@
 </button> -->
 <mat-vertical-stepper [linear]="isLinear" #stepper>
 
-    <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>REGISTRO </ng-template>
 
             <mat-label>COLABORADOR</mat-label>
@@ -35,32 +35,32 @@
             <BR>
             <mat-form-field>
                 <mat-label>DNI Cliente</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="DNI" required>
+                <input matInput formControlName="firstCtrl" name="dniCLiente" placeholder="DNI" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Nombres</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Nombres" required>
+                <input matInput formControlName="firstCtrl" name="nombres" placeholder="Nombres" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Apellido Paterno</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ap. Paterno" required>
+                <input matInput formControlName="firstCtrl" name="apPaterno" placeholder="Ap. Paterno" required>
             </mat-form-field>
             &nbsp;
             <mat-form-field>
                 <mat-label>Apellido Materno</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ap. Materno" required>
+                <input matInput formControlName="firstCtrl" name="apMaterno" placeholder="Ap. Materno" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Correo Electrónico</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Email" required>
+                <input matInput formControlName="firstCtrl" name="email" placeholder="Email" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Celular</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Celular" required>
+                <input matInput formControlName="firstCtrl" name="celular" placeholder="Celular" required>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -68,9 +68,9 @@
                 <input matInput>
 
                 <br>
-                <mat-radio-button class="example-margin" value="after">Cliente</mat-radio-button>
+                <mat-radio-button class="example-margin" name="rbcliente" value="after">Cliente</mat-radio-button>
                 &nbsp;
-                <mat-radio-button class="example-margin" value="before">Comercio</mat-radio-button>
+                <mat-radio-button class="example-margin" name="rbcomercio" value="before">Comercio</mat-radio-button>
             </mat-form-field>
             <br>
 
@@ -88,7 +88,7 @@
             <div>
                 <!-- <button mat-button matStepperPrevious>Back</button> -->
 
-                <button mat-raised-button color="primary">ENVIAR</button>
+                <button mat-raised-button color="primary" (click)="enviar()">ENVIAR</button>
             </div>
         </form>
     </mat-step>
