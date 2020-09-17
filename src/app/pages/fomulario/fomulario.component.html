@@ -26,7 +26,7 @@
             <h1 class="h1">COLABORADOR</h1>
             <mat-form-field>
                 <mat-label>DNI Colaborador</mat-label>
-                <input type="TEXT" matInput placeholder="colaborador" required>
+                <input type="TEXT" matInput formControlName="dnicolaborador" placeholder="colaborador" required>
             </mat-form-field>
             <div>
                 &nbsp;
@@ -34,32 +34,32 @@
             <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
             <mat-form-field>
                 <mat-label>DNI Cliente</mat-label>
-                <input matInput name="dni" placeholder="DNI" required>
+                <input matInput name="dni" formControlName="dnicliente" placeholder="DNI" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Nombres</mat-label>
-                <input matInput name="nombres" placeholder="Nombres" required>
+                <input matInput name="nombres" formControlName="nombres" placeholder="Nombres" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Apellido Paterno</mat-label>
-                <input matInput name="apPaterno" placeholder="Ap. Paterno" required>
+                <input matInput name="apPaterno" formControlName="apPaterno" placeholder="Ap. Paterno" required>
             </mat-form-field>
             &nbsp;
             <mat-form-field>
                 <mat-label>Apellido Materno</mat-label>
-                <input matInput name="apMaterno" placeholder="Ap. Materno" required>
+                <input matInput name="apMaterno" formControlName="apMaterno" placeholder="Ap. Materno" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Correo Electrónico</mat-label>
-                <input matInput name="email" placeholder="Email" required>
+                <input matInput name="email" formControlName="eMail" placeholder="Email" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Celular</mat-label>
-                <input matInput name="celular" placeholder="Celular" required>
+                <input matInput name="celular" formControlName="celular" placeholder="Celular" required>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -79,16 +79,22 @@
             <div>
                 <!-- <button mat-button matStepperPrevious>Back</button> -->
 
-                <button mat-raised-button color="primary" (click)="enviar()" class="casilla">ENVIAR</button>
+                <button mat-raised-button color="primary" (click)="enviar()" class="casilla" [formGroup]="firstFormGroup">ENVIAR</button>
             </div>
             <div>
                 &nbsp;
             </div>
+
             <div>
                 <img mat-card-image SRC="assets\IMG\caja-cusco-imagen2.png">
             </div>
-
         </form>
     </mat-step>
 
+
 </mat-vertical-stepper>
+<mat-card-footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://www.cmac-cusco.com.pe/"> cmac-cusco.com.pe</a>
+    </div>
+</mat-card-footer>

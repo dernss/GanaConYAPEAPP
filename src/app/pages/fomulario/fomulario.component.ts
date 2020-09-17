@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FormularioService } from '../../services/formulario.service';
 import { GanaConYAPE } from '../../Model/formulario';
-
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fomulario',
@@ -19,24 +21,34 @@ export class FomularioComponent implements OnInit {
   listaEnvio: any[];
 
 
-  dni: string;
 
   checked = false;
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
 
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder,
+              private formularioService: FormularioService,
+              ){}
 
   ngOnInit() {
       this.firstFormGroup = this.formBuilder.group({
-
+        dnicolaborador: new FormControl(''),
+        dnicliente: new FormControl(''),
+        nombres: new FormControl(''),
+        apPaterno: new FormControl(''),
+        apMaterno: new FormControl(''),
+        eMail: new FormControl(''),
+        celular: new FormControl('')
     });
   }
 
-  enviar(){
-    console.log(this.firstFormGroup.value);
-  }
+   enviar():void{
+     this.formularioService.registrarUsuario(this.model)
+         .subscribe(() =>{console.log("registro Exitoso");})}
 
+  //   this.formularioService.registrarUsuario(this.firstFormGroup.value);
+  //   console.log(this.firstFormGroup.value);
 
+  
 }
