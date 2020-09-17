@@ -47,6 +47,9 @@ export class FomularioComponent implements OnInit {
      this.formularioService.registrarUsuario(this.model)
          .subscribe(() =>{console.log("registro Exitoso");})}
 
+    validarColaborador():void{
+          this.formularioService.validarColaborador(this.model)
+              .subscribe(() =>{console.log("Correcto");})}
   //   this.formularioService.registrarUsuario(this.firstFormGroup.value);
   //   console.log(this.firstFormGroup.value);
 
