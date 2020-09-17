@@ -27,42 +27,50 @@
             <h1 class="h1">COLABORADOR</h1>
             <mat-form-field>
                 <mat-label>DNI Colaborador</mat-label>
-                <input type="TEXT" matInput formControlName="dnicolaborador" placeholder="colaborador" required>
+                <input type="TEXT" matInput formControlName="dnicolaborador" required>
             </mat-form-field>
             &nbsp;
-            <button mat-raised-button color="primary" (click)="validarColaborador()" [formGroup]="firstFormGroup">Validar</button>
+            <mat-form-field>
+                <mat-label>Fecha Emisión</mat-label>
+                <input type="date" matInput formControlName="fechaEmision" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Usuario</mat-label>
+                <input type="TEXT" matInput required>
+            </mat-form-field>
             <div>
                 &nbsp;
             </div>
             <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
             <mat-form-field>
                 <mat-label>DNI Cliente</mat-label>
-                <input matInput name="dni" formControlName="dnicliente" placeholder="DNI" required>
+                <input matInput name="dni" formControlName="dnicliente" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Nombres</mat-label>
-                <input matInput name="nombres" formControlName="nombres" placeholder="Nombres" required>
+                <input matInput name="nombres" formControlName="nombres" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Apellido Paterno</mat-label>
-                <input matInput name="apPaterno" formControlName="apPaterno" placeholder="Ap. Paterno" required>
+                <input matInput name="apPaterno" formControlName="apPaterno" required>
             </mat-form-field>
             &nbsp;
             <mat-form-field>
                 <mat-label>Apellido Materno</mat-label>
-                <input matInput name="apMaterno" formControlName="apMaterno" placeholder="Ap. Materno" required>
+                <input matInput name="apMaterno" formControlName="apMaterno" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Correo Electrónico</mat-label>
-                <input matInput name="email" formControlName="eMail" placeholder="Email" required>
+                <input matInput name="email" formControlName="eMail" required>
             </mat-form-field>
             <br>
             <mat-form-field>
                 <mat-label>Celular</mat-label>
-                <input matInput name="celular" formControlName="celular" placeholder="Celular" required>
+                <input matInput name="celular" formControlName="celular" required>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -78,6 +86,9 @@
             <br>
             <div>
                 &nbsp;
+            </div>
+            <div>
+                <button class="g-recaptcha" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>Submit</button>
             </div>
             <div>
                 <!-- <button mat-button matStepperPrevious>Back</button> -->
@@ -102,3 +113,11 @@
         <a href="https://www.cmac-cusco.com.pe/"> cmac-cusco.com.pe</a>
     </div>
 </mat-card-footer>
+
+<script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
+</script>
+<!--js-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
