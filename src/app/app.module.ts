@@ -17,9 +17,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from "@angular/common/http";
 import { RecaptchaModule } from 'ng-recaptcha';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
-
-
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 
 
 
@@ -44,11 +45,13 @@ import { RecaptchaModule } from 'ng-recaptcha';
     HttpClientModule,
     MatCheckboxModule,
     RecaptchaModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     BrowserAnimationsModule
   ],
 
   providers: [
-
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
   ],
   bootstrap: [AppComponent]
 })

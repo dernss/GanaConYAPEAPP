@@ -22,71 +22,90 @@
 <mat-vertical-stepper [linear]="isLinear" #stepper>
 
     <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="enviar()">
+            <!-- <mat-error *ngIf=formInvalid>
+                    {{ dnicolaborador }} -->
+            <!-- </mat-error> -->
             <ng-template matStepLabel>REGISTRO </ng-template>
             <h1 class="h1">COLABORADOR</h1>
-            <mat-form-field>
-                <mat-label>DNI Colaborador</mat-label>
-                <input type="text" matInput formControlName="dnicolaborador" required maxlength="8">
-            </mat-form-field>
-            &nbsp;
+            <div>
+                <mat-form-field>
+                    <mat-label>DNI Colaborador</mat-label>
+                    <input type="text" matInput formControlName="dnicolaborador" [class.is-invalid]="dniNoValido" maxLength="8">
+                </mat-form-field>
+                &nbsp;
+                <small *ngIf="dniNoValido" class="text-danger">Ingrese Nro DNI </small>
+            </div>
             <mat-form-field>
                 <mat-label>Usuario</mat-label>
-                <input type="text" matInput formControlName="cusuario" required maxlength="4">
+                <input type="text" matInput formControlName="cusuario" [class.is-invalid]="usuarioNoValido" maxLength="4">
             </mat-form-field>
+            &nbsp;
+            <small *ngIf="usuarioNoValido" class="text-danger">Ingrese Usuario </small>
             <br>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Fecha Emisión</mat-label>
-                <input type="date" matInput formControlName="fecemision" required>
+                <input matInput [matDatepicker]="picker2" formControlName="fecemision" [class.is-invalid]="fechaNoValido">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
             </mat-form-field>
-
+            &nbsp;
+            <small *ngIf="fechaNoValido" class="text-danger">Fecha Inválida </small>
             <div>
                 &nbsp;
             </div>
             <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
             <mat-form-field>
                 <mat-label>DNI Cliente</mat-label>
-                <input matInput name="dni" formControlName="dnicliente" required minlength="3" maxlength="8">
+                <input matInput name="dni" formControlName="dnicliente" [class.is-invalid]="dniclienteNoValido" maxLength="8">
 
             </mat-form-field>
+            &nbsp;
+            <small *ngIf="dniclienteNoValido" class="text-danger">Ingrese DNI Cliente </small>
             <br>
             <mat-form-field>
                 <mat-label>Nombres</mat-label>
-                <input matInput name="nombres" formControlName="nombres" required>
+                <input matInput name="nombres" formControlName="nombres" [class.is-invalid]="nombresNoValido">
             </mat-form-field>
+            &nbsp;
+            <small *ngIf="nombresNoValido" class="text-danger">Ingrese Nombre Cliente </small>
             <br>
             <mat-form-field>
                 <mat-label>Apellido Paterno</mat-label>
-                <input matInput name="apPaterno" formControlName="apPaterno" required>
+                <input matInput name="apPaterno" formControlName="apPaterno" [class.is-invalid]="apPaternoNoValido">
             </mat-form-field>
             &nbsp;
+            <small *ngIf="apPaternoNoValido" class="text-danger">Ingrese Apellido Paterno Cliente </small>
+            <br>
             <mat-form-field>
                 <mat-label>Apellido Materno</mat-label>
-                <input matInput name="apMaterno" formControlName="apMaterno" required>
+                <input matInput name="apMaterno" formControlName="apMaterno" [class.is-invalid]="apMaternoNoValido">
             </mat-form-field>
+            &nbsp;
+            <small *ngIf="apMaternoNoValido" class="text-danger">Ingrese Apellido Materno Cliente </small>
             <br>
             <mat-form-field>
                 <mat-label>Correo Electrónico</mat-label>
-                <input type="email" matInput name="email" formControlName="eMail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                <input type="email" matInput name="email" formControlName="eMail" [class.is-invalid]="eMailNoValido">
             </mat-form-field>
+            &nbsp;
+            <small *ngIf="eMailNoValido" class="text-danger">Ingrese Correo Electrónico Cliente </small>
             <br>
             <mat-form-field>
                 <mat-label>Celular</mat-label>
-                <input matInput name="celular" formControlName="celular" required maxlength="9">
+                <input matInput name="celular" formControlName="celular" [class.is-invalid]="celularNoValido" maxLength="9">
             </mat-form-field>
+            &nbsp;
+            <small *ngIf="celularNoValido" class="text-danger">Ingrese Celular Cliente </small>
             <br>
-            <mat-form-field>
-                <mat-label>Condición</mat-label>
-                <input matInput>
-                <br>
-
-                <mat-radio-group formControlName="valoresRadio">
-                    <mat-radio-button class="example-margin" value="1">Cliente</mat-radio-button>
-                    &nbsp;
-                    <mat-radio-button class="example-margin" value="2">Comercio</mat-radio-button>
-
-                </mat-radio-group>
-            </mat-form-field>
+            <mat-radio-group formControlName="valoresRadio" [class.is-invalid]="valoresRadioNoValido">
+                <mat-radio-button class="example-margin" value="1">Cliente</mat-radio-button>
+                &nbsp;
+                <mat-radio-button class="example-margin" value="2">Comercio</mat-radio-button>
+                &nbsp;
+                <small *ngIf="valoresRadioNoValido" class="text-danger">Ingrese Celular Cliente </small>
+            </mat-radio-group>
+            <br>
             <br>
             <mat-label>* El Cliente debe tener activo la opción de compras por internet</mat-label>
             <br>
@@ -101,9 +120,7 @@
 
             <br>
             <div>
-                <!-- <button mat-button matStepperPrevious>Back</button> -->
-
-                <button mat-raised-button color="primary" (click)="enviar()" [formGroup]="firstFormGroup">ENVIAR</button>
+                <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!captchavalido ">ENVIAR</button>
             </div>
             <div>
                 &nbsp;
@@ -111,7 +128,18 @@
 
 
         </form>
+        <!-- <hr>
+        <pre>
+            Estado del formulario: {{firstFormGroup.valid}}
+            <br>
+            Status : {{firstFormGroup.status}}
+        </pre>
+        <pre>
+            {{firstFormGroup.value | json}}
+        </pre> -->
+
     </mat-step>
+
 
 
 </mat-vertical-stepper>

@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {Component, OnInit, SimpleChange} from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl, ControlContainer } from '@angular/forms';
 import { FormularioService } from '../../services/formulario.service';
 import { GanaConYAPE } from '../../Model/formulario';
 import { ActivatedRoute } from '@angular/router';
@@ -18,98 +18,147 @@ export class FomularioComponent implements OnInit {
 
   public validated_captcha: boolean;
 
-  // este es tu form principal aca tiene que ir el captacha sabe sabe sabe
 
   isLinear = false;
   firstFormGroup: FormGroup;
   request: any;
   listaEnvio: any[];
   recaptcha: any[];
-  dni2: string;
+  captcha: string;
 
-  checked = false;
+  captchavalido = false;
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';
 
-  //valoresRadio = 0;
+  fecha = new Date();
 
-  disabled = false;
+
 
   constructor(private formBuilder: FormBuilder,
               private formularioService: FormularioService,
-              
-
               ){
                 this.validated_captcha = false;
-                //this.GanaConYAPE = new GanaConYAPE(); // completar con cantidad de campos
+               
               }
 
 
 
   ngOnInit() {
       this.firstFormGroup = this.formBuilder.group({
-        dnicolaborador: new FormControl(''),
-        cusuario: new FormControl(''),
-        fechaemision: new FormControl(''),
-        dnicliente: new FormControl(''),
-        nombres: new FormControl(''),
-        apPaterno: new FormControl(''),
-        apMaterno: new FormControl(''),
-        eMail: new FormControl(''),
-        celular: new FormControl(''),
-        valoresRadio: new FormControl('')
-        
-       
+        dnicolaborador: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+        cusuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
+        fecemision: new FormControl('', [Validators.required, Validators.nullValidator]),
+        dnicliente: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
+        nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+        apPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+        apMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+        eMail: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+        celular: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
+        valoresRadio: new FormControl('', Validators.nullValidator)
+  
     });
+    this.captchavalido = false;
   }
 
-  
-    //  this.formularioService.registrarUsuario(this.model)
-    //      .subscribe(() =>{console.log("registro Exitoso");})}
+   /*
+    if (this.firstFormGroup.valid && this.captcha != null)
+      this.captchavalido = true;
+    */
+
+
+ 
+
+  get dniNoValido(){
+    return this.firstFormGroup.get('dnicolaborador').invalid && this.firstFormGroup.get('dnicolaborador').touched
+  }
+  get usuarioNoValido(){
+    return this.firstFormGroup.get('cusuario').invalid && this.firstFormGroup.get('cusuario').touched
+  }
+  get fechaNoValido(){
+    return this.firstFormGroup.get('fecemision').invalid && this.firstFormGroup.get('fecemision').touched
+  }
+  get dniclienteNoValido(){
+    return this.firstFormGroup.get('dnicliente').invalid && this.firstFormGroup.get('dnicliente').touched
+  }
+  get nombresNoValido(){
+    return this.firstFormGroup.get('nombres').invalid && this.firstFormGroup.get('nombres').touched
+  }
+  get apPaternoNoValido(){
+    return this.firstFormGroup.get('apPaterno').invalid && this.firstFormGroup.get('apPaterno').touched
+  }
+  get apMaternoNoValido(){
+    return this.firstFormGroup.get('apMaterno').invalid && this.firstFormGroup.get('apMaterno').touched
+  }
+  get eMailNoValido(){
+    return this.firstFormGroup.get('eMail').invalid && this.firstFormGroup.get('eMail').touched
+  }
+  get celularNoValido(){
+    return this.firstFormGroup.get('celular').invalid && this.firstFormGroup.get('celular').touched
+  } 
+  get valoresRadioNoValido(){
+    return this.firstFormGroup.get('valoresRadio').invalid && this.firstFormGroup.get('valoresRadio').touched
+  } 
+
 
     validarColaborador():void{
           this.formularioService.validarColaborador(this.model)
               .subscribe(() =>{console.log("Correcto");})}
-  //   this.formularioService.registrarUsuario(this.firstFormGroup.value);
-  //   console.log(this.firstFormGroup.value);
-  /*
-    resolver(captchaResponse: any[]){
-      this.recaptcha = captchaResponse;
-
-     this.model.recaptchaResponse=captchaResponse;
-     this.model.colaborador=this.firstFormGroup.value.dni
-    }*/
+  
 
     resolver(response){
-      this.dni2 = response;
-    }
 
+      this.captcha = response;
+      
+
+      if (this.firstFormGroup.value.dnicolaborador != '' && 
+          this.firstFormGroup.value.fecemision != '' &&
+          this.firstFormGroup.value.cusuario != '' &&
+          this.firstFormGroup.value.dnicliente != '' &&
+          this.firstFormGroup.value.nombres != '' &&
+          this.firstFormGroup.value.apPaterno != '' &&
+          this.firstFormGroup.value.apMaterno != '' &&
+          this.firstFormGroup.value.celular != '' &&
+          this.firstFormGroup.value.eMail != '' &&
+          this.firstFormGroup.value.celular != '' &&
+          this.firstFormGroup.value.valoresRadio != ''){
+        this.captchavalido = true;
+      }
+    }
+// muestrame de nbuevo
 
     enviar():void{
        
        this.model.colaborador = this.firstFormGroup.value.dnicolaborador;
        this.model.tipoDocumento = 1;
        this.model.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
-       this.model.fechaEmision = this.firstFormGroup.value.fecemision;
-       this.model.usuario = this.firstFormGroup.value.dnicolaborador;
-       this.model.cliente = this.firstFormGroup.value.dnicolaborador;
-       this.model.nombres = this.firstFormGroup.value.dnicolaborador;
-       this.model.appaterno = this.firstFormGroup.value.dnicolaborador;
-       this.model.apmaterno = this.firstFormGroup.value.dnicolaborador;
-       this.model.telefono = this.firstFormGroup.value.dnicolaborador;
-       this.model.correoElectronico = this.firstFormGroup.value.dnicolaborador;
-       this.model.condicion = this.firstFormGroup.value.dnicolaborador;
-       this.model.recaptchaResponse = this.firstFormGroup.value.dnicolaborador;
-      //console.log(this.firstFormGroup.value);
-      console.log(this.model.recaptchaResponse);
-      console.log(this.model.colaborador);
-      console.log(this.firstFormGroup.value.apMaterno);
-      
-      
-      
+       this.model.fechaEmision =  this.firstFormGroup.value.fecemision; 
+       this.model.usuario = this.firstFormGroup.value.cusuario;
+       this.model.cliente = this.firstFormGroup.value.dnicliente;
+       this.model.nombres = this.firstFormGroup.value.nombres;
+       this.model.appaterno = this.firstFormGroup.value.apPaterno;
+       this.model.apmaterno = this.firstFormGroup.value.apMaterno;
+       this.model.telefono = this.firstFormGroup.value.celular;
+       this.model.correoElectronico = this.firstFormGroup.value.eMail;
+       this.model.condicion = this.firstFormGroup.value.valoresRadio;
+       this.model.recaptchaResponse = this.captcha;
+         
+       this.formularioService.registrarUsuario(this.model)
+              .subscribe(() =>{console.log("Registro Correcto");})
+
+      this.firstFormGroup.reset({
+        dnicolaborador: "",
+        cusuario: "",
+        fecemision: "",
+        dnicliente: "",
+        nombres: "",
+        apPaterno: "",
+        apMaterno: "",
+        eMail: "",
+        celular: "",
+        valoresRadio: ""
+      });
+     }  
 
   
-     }
-   
   
 }
