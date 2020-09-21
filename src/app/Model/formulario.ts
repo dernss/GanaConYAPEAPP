@@ -1,11 +1,20 @@
 export class GanaConYAPE{
-        public dniColaborador: string;
-        public dniCliente: string;
+        public colaborador: string; // dni colaborador 1
+        public tipoDocumento: number;
+        public numeroDocumento: string;  // dni colaborador 2
+        public fechaEmision: string;
+        public usuario: string;
+        public cliente: string; // dni cliente 1
         public nombres: string;
         public appaterno: string;
         public apmaterno: string;
-        public email: string;
-        public celular: string;
+        public telefono: string;
+        public correoElectronico: string;
         public condicion: number;
+        public recaptchaResponse: any;
+
+
+        
 
 }
+

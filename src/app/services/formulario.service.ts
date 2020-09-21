@@ -17,7 +17,7 @@ export class FormularioService {
     }
 
     validarColaborador(model: GanaConYAPE): Observable<any>{
-        return this.http.post('http://200.37.108.23/msusuario/yape/colaborador', model.dniColaborador);
+        return this.http.post('http://200.37.108.23/msusuario/yape/colaborador', model);
     }
 
 }
