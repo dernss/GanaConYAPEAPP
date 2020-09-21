@@ -54,7 +54,7 @@ export class FomularioComponent implements OnInit {
         apMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
         eMail: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
         celular: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
-        valoresRadio: new FormControl('', Validators.nullValidator)
+        valoresRadio: new FormControl('', Validators.required)
   
     });
     this.captchavalido = false;
@@ -96,7 +96,7 @@ export class FomularioComponent implements OnInit {
     return this.firstFormGroup.get('celular').invalid && this.firstFormGroup.get('celular').touched
   } 
   get valoresRadioNoValido(){
-    return this.firstFormGroup.get('valoresRadio').invalid && this.firstFormGroup.get('valoresRadio').touched
+    return this.firstFormGroup.get('valoresRadio').invalid && this.firstFormGroup.get('valoresRadio').pristine
   } 
 
 
@@ -144,8 +144,9 @@ export class FomularioComponent implements OnInit {
          
        this.formularioService.registrarUsuario(this.model)
               .subscribe(() =>{console.log("Registro Correcto");})
-
-      this.firstFormGroup.reset({
+      
+      
+      this.firstFormGroup.setValue({
         dnicolaborador: "",
         cusuario: "",
         fecemision: "",
@@ -157,8 +158,12 @@ export class FomularioComponent implements OnInit {
         celular: "",
         valoresRadio: ""
       });
-     }  
 
-  
-  
+      if(!this.firstFormGroup.valid){
+        this.captchavalido=false;
+        grecaptcha.reset();     
+      }
+
+     }
+
 }

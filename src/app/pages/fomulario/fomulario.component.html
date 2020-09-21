@@ -103,7 +103,7 @@
                 &nbsp;
                 <mat-radio-button class="example-margin" value="2">Comercio</mat-radio-button>
                 &nbsp;
-                <small *ngIf="valoresRadioNoValido" class="text-danger">Ingrese Celular Cliente </small>
+                <small *ngIf="valoresRadioNoValido" class="text-danger">Escoja una Opción </small>
             </mat-radio-group>
             <br>
             <br>
@@ -120,7 +120,7 @@
 
             <br>
             <div>
-                <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!captchavalido ">ENVIAR</button>
+                <button mat-raised-button color="primary" Name="btnenviar" (click)="enviar()" [disabled]="!captchavalido ">ENVIAR</button>
             </div>
             <div>
                 &nbsp;

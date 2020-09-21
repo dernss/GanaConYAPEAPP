@@ -51,7 +51,7 @@ import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
   ],
 
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
   ],
   bootstrap: [AppComponent]
 })
