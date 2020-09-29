@@ -20,4 +20,8 @@ export class FormularioService {
         return this.http.post('http://200.37.108.23/msusuario/yape/colaborador', model);
     }
 
+    registrarUsuario2(model: GanaConYAPE): void{
+      console.log(model);
+    }
+
 }

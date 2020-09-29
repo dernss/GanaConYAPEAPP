@@ -22,7 +22,7 @@
 <mat-vertical-stepper [linear]="isLinear" #stepper>
 
     <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup" (ngSubmit)="enviar()">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
             <!-- <mat-error *ngIf=formInvalid>
                     {{ dnicolaborador }} -->
             <!-- </mat-error> -->
@@ -120,7 +120,7 @@
 
             <br>
             <div>
-                <button mat-raised-button color="primary" Name="btnenviar" (click)="enviar()" [disabled]="!captchavalido ">ENVIAR</button>
+                <button mat-raised-button color="primary" Name="btnenviar" (click)="onSubmit()" [disabled]="!captchavalido ">ENVIAR</button>
             </div>
             <div>
                 &nbsp;

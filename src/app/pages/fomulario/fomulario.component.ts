@@ -126,26 +126,48 @@ export class FomularioComponent implements OnInit {
     }
 // muestrame de nbuevo
 
+
+onSubmit(): void{
+  //this.formularioService.registrarUsuario2(this.model)
+  //.subscribe(() =>{console.log("Registro Correcto");})
+  
+   //this.model.colaborador.tipoDocumento = 1;
+   //this.model.colaborador.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
+   this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
+   this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
+
+   //this.model.cliente.tipoDocumento = 1;
+   //this.model.cliente.numeroDocumento = this.firstFormGroup.value.dnicliente;
+   this.model.cliente.nombres = this.firstFormGroup.value.nombres;
+   this.model.cliente.apellidoPaterno = this.firstFormGroup.value.apPaterno;
+  //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
+  //  this.model.telefono = this.firstFormGroup.value.celular;
+  //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
+  //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
+  //  this.model.recaptchaResponse = this.captcha;
+  console.log(this.model);
+  
+  
+}
+
     enviar():void{
        
-       this.model.colaborador = this.firstFormGroup.value.dnicolaborador;
-       this.model.tipoDocumento = 1;
-       this.model.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
-       this.model.fechaEmision =  this.firstFormGroup.value.fecemision; 
-       this.model.usuario = this.firstFormGroup.value.cusuario;
-       this.model.cliente = this.firstFormGroup.value.dnicliente;
-       this.model.nombres = this.firstFormGroup.value.nombres;
-       this.model.appaterno = this.firstFormGroup.value.apPaterno;
-       this.model.apmaterno = this.firstFormGroup.value.apMaterno;
-       this.model.telefono = this.firstFormGroup.value.celular;
-       this.model.correoElectronico = this.firstFormGroup.value.eMail;
-       this.model.condicion = this.firstFormGroup.value.valoresRadio;
-       this.model.recaptchaResponse = this.captcha;
+      //  this.model.colaborador = this.firstFormGroup.value.dnicolaborador;
+      //  this.model.tipoDocumento = 1;
+      //  this.model.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
+      //  this.model.fechaEmision =  this.firstFormGroup.value.fecemision;
+      //  this.model.usuario = this.firstFormGroup.value.cusuario;
+      //  this.model.cliente = this.firstFormGroup.value.dnicliente;
+      //  this.model.nombres = this.firstFormGroup.value.nombres;
+      //  this.model.appaterno = this.firstFormGroup.value.apPaterno;
+      //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
+      //  this.model.telefono = this.firstFormGroup.value.celular;
+      //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
+      //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
+      //  this.model.recaptchaResponse = this.captcha;
          
        this.formularioService.registrarUsuario(this.model)
               .subscribe(() =>{console.log("Registro Correcto");})
-      
-      
       this.firstFormGroup.setValue({
         dnicolaborador: "",
         cusuario: "",
