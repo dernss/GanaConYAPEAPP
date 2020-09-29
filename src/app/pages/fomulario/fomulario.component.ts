@@ -37,7 +37,7 @@ export class FomularioComponent implements OnInit {
       celular: new FormControl(''),
       valoresRadio: new FormControl('')
   })
-    
+
 });
 
   colaborador: FormGroup;
@@ -59,14 +59,14 @@ export class FomularioComponent implements OnInit {
               private formularioService: FormularioService,
               ){
                 this.validated_captcha = false;
-               
+
               }
 
 
 
   ngOnInit() {
-   
-  
+
+
      this.colaborador = this.formBuilder.group({
         numeroDocumento: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
         usuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
@@ -80,14 +80,14 @@ export class FomularioComponent implements OnInit {
       eMail: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
       celular: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
       valoresRadio: new FormControl('', Validators.required)
-    
+
   });
 
 
-  
+
     this.captchavalido = false;
 
-    
+
 
 
   }
@@ -98,7 +98,7 @@ export class FomularioComponent implements OnInit {
     */
 
 
- 
+
 
   get dniNoValido(){
     return this.colaborador.get('numeroDocumento').invalid && this.colaborador.get('numeroDocumento').touched
@@ -107,6 +107,7 @@ export class FomularioComponent implements OnInit {
     return this.colaborador.get('usuario').invalid && this.colaborador.get('usuario').touched
   }
   get fechaNoValido(){
+
     return this.colaborador.get('fechaEmision').invalid && this.colaborador.get('fechaEmision').touched
   }
   get dniclienteNoValido(){
@@ -126,23 +127,23 @@ export class FomularioComponent implements OnInit {
   }
   get celularNoValido(){
     return this.cliente.get('celular').invalid && this.cliente.get('celular').touched
-  } 
+  }
   get valoresRadioNoValido(){
     return this.cliente.get('valoresRadio').invalid && this.cliente.get('valoresRadio').pristine
-  } 
+  }
 
 
     validarColaborador():void{
           this.formularioService.validarColaborador(this.model)
               .subscribe(() =>{console.log("Correcto");})}
-  
+
 
     resolver(response){
 
       this.captcha = response;
-      
 
-      if (this.colaborador.value.numeroDocumento != '' && 
+
+      if (this.colaborador.value.numeroDocumento != '' &&
           this.colaborador.value.fechaEmision != '' &&
           this.colaborador.value.usuario != '' &&
           this.cliente.value.numeroDocumento != '' &&
@@ -160,17 +161,17 @@ export class FomularioComponent implements OnInit {
 
 
 onSubmit(): void{
-
+  this.colaborador.value.fechaEmision = this.formularioService.formatDate(this.colaborador.value.fechaEmision);
   console.log(this.cliente.value);
   console.log('modal-headere');
   console.log(this.colaborador.value);
   console.log('modal-headere');
   // this.formularioService.registrarUsuario2(this.model)
   // .subscribe(() =>{console.log("Registro Correcto");})
-  
+
   //  this.model.colaborador.tipoDocumento = 1;
   //  this.model.colaborador.numeroDocumento = this.colaborador.value.numeroDocumento;
-   
+
   //  this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
   //  this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
 
@@ -187,13 +188,13 @@ onSubmit(): void{
 
 
   console.log(this.model);
-  
-  
-  
+
+
+
 }
 
     enviar():void{
-       
+
       //  this.model.colaborador = this.firstFormGroup.value.dnicolaborador;
       //  this.model.tipoDocumento = 1;
       //  this.model.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
@@ -207,7 +208,7 @@ onSubmit(): void{
       //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
       //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
       //  this.model.recaptchaResponse = this.captcha;
-         
+
        this.formularioService.registrarUsuario(this.model)
               .subscribe(() =>{console.log("Registro Correcto");})
       // this.colaborador.setValue({
@@ -225,7 +226,7 @@ onSubmit(): void{
 
       if(!this.colaborador.valid){
         this.captchavalido=false;
-        grecaptcha.reset();     
+        grecaptcha.reset();
       }
 
      }
