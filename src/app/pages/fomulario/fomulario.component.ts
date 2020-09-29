@@ -31,17 +31,18 @@ export class FomularioComponent implements OnInit {
 
       numeroDocumento: new FormControl(''),
       nombres: new FormControl(''),
-      apPaterno: new FormControl(''),
-      apMaterno: new FormControl(''),
-      eMail: new FormControl(''),
-      celular: new FormControl(''),
-      valoresRadio: new FormControl('')
+      apellidoPaterno: new FormControl(''),
+      apellidoMaterno: new FormControl(''),
+      correoElectronico: new FormControl(''),
+      telefono: new FormControl(''),
+      condicion: new FormControl('')
   })
     
 });
 
   colaborador: FormGroup;
   cliente: FormGroup;
+  jsonService: any;
   request: any;
   listaEnvio: any[];
   recaptcha: any[];
@@ -75,11 +76,11 @@ export class FomularioComponent implements OnInit {
     this.cliente = this.formBuilder.group({
       numeroDocumento: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
       nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-      apPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-      apMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-      eMail: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      celular: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
-      valoresRadio: new FormControl('', Validators.required)
+      apellidoPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+      apellidoMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+      correoElectronico: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      telefono: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
+      condicion: new FormControl('', Validators.required)
     
   });
 
@@ -116,19 +117,19 @@ export class FomularioComponent implements OnInit {
     return this.cliente.get('nombres').invalid && this.cliente.get('nombres').touched
   }
   get apPaternoNoValido(){
-    return this.cliente.get('apPaterno').invalid && this.cliente.get('apPaterno').touched
+    return this.cliente.get('apellidoPaterno').invalid && this.cliente.get('apellidoPaterno').touched
   }
   get apMaternoNoValido(){
-    return this.cliente.get('apMaterno').invalid && this.cliente.get('apMaterno').touched
+    return this.cliente.get('apellidoMaterno').invalid && this.cliente.get('apellidoMaterno').touched
   }
   get eMailNoValido(){
-    return this.cliente.get('eMail').invalid && this.cliente.get('eMail').touched
+    return this.cliente.get('correoElectronico').invalid && this.cliente.get('correoElectronico').touched
   }
   get celularNoValido(){
-    return this.cliente.get('celular').invalid && this.cliente.get('celular').touched
+    return this.cliente.get('telefono').invalid && this.cliente.get('telefono').touched
   } 
   get valoresRadioNoValido(){
-    return this.cliente.get('valoresRadio').invalid && this.cliente.get('valoresRadio').pristine
+    return this.cliente.get('condicion').invalid && this.cliente.get('condicion').pristine
   } 
 
 
@@ -147,81 +148,60 @@ export class FomularioComponent implements OnInit {
           this.colaborador.value.usuario != '' &&
           this.cliente.value.numeroDocumento != '' &&
           this.cliente.value.nombres != '' &&
-          this.cliente.value.apPaterno != '' &&
-          this.cliente.value.apMaterno != '' &&
-          this.cliente.value.celular != '' &&
-          this.cliente.value.eMail != '' &&
-          this.cliente.value.celular != '' &&
-          this.cliente.value.valoresRadio != ''){
+          this.cliente.value.apellidoPaterno != '' &&
+          this.cliente.value.apellidoMaterno != '' &&
+          this.cliente.value.telefono != '' &&
+          this.cliente.value.correoElectronico != '' &&
+          this.cliente.value.telefono != '' &&
+          this.cliente.value.condicion != ''){
         this.captchavalido = true;
       }
     }
-// muestrame de nbuevo
 
 
 onSubmit(): void{
 
-  console.log(this.cliente.value);
-  console.log('modal-headere');
-  console.log(this.colaborador.value);
-  console.log('modal-headere');
-  // this.formularioService.registrarUsuario2(this.model)
-  // .subscribe(() =>{console.log("Registro Correcto");})
-  
-  //  this.model.colaborador.tipoDocumento = 1;
-  //  this.model.colaborador.numeroDocumento = this.colaborador.value.numeroDocumento;
-   
-  //  this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
-  //  this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
+  this.jsonService = {};
+  this.jsonService.colaborador = this.colaborador.value;
+  this.jsonService.colaborador.tipoDocumento = 1 ;
+  this.jsonService.cliente = this.cliente.value;
+  this.jsonService.cliente.tipoDocumento = 1 ;
 
-   //this.model.cliente.tipoDocumento = 1;
-   //this.model.cliente.numeroDocumento = this.firstFormGroup.value.dnicliente;
-  //  this.model.cliente.nombres = this.firstFormGroup.value.nombres;
-  //  this.model.cliente.apellidoPaterno = this.firstFormGroup.value.apPaterno;
-  //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
-  //  this.model.telefono = this.firstFormGroup.value.celular;
-  //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
-  //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
-  //  this.model.recaptchaResponse = this.captcha;
-  //console.log(this.firstFormGroup.value,this.secondFormGroup.value);
+  this.colaborador.reset({
+    numerodocumento: "",
+    usuario: "",
+    fechaEmision: "",
+
+  });
 
 
-  console.log(this.model);
-  
+     console.log(this.jsonService);
+
+
+    this.formularioService.registrarUsuario(this.jsonService)
+    .subscribe(() =>{console.log("Registro Correcto");})
+
   
   
 }
 
     enviar():void{
        
-      //  this.model.colaborador = this.firstFormGroup.value.dnicolaborador;
-      //  this.model.tipoDocumento = 1;
-      //  this.model.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
-      //  this.model.fechaEmision =  this.firstFormGroup.value.fecemision;
-      //  this.model.usuario = this.firstFormGroup.value.cusuario;
-      //  this.model.cliente = this.firstFormGroup.value.dnicliente;
-      //  this.model.nombres = this.firstFormGroup.value.nombres;
-      //  this.model.appaterno = this.firstFormGroup.value.apPaterno;
-      //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
-      //  this.model.telefono = this.firstFormGroup.value.celular;
-      //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
-      //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
-      //  this.model.recaptchaResponse = this.captcha;
          
        this.formularioService.registrarUsuario(this.model)
               .subscribe(() =>{console.log("Registro Correcto");})
-      // this.colaborador.setValue({
-      //   numerodocumento: "",
-      //   usuario: "",
-      //   fechaEmision: "",
-      //   dnicliente: "",
-      //   nombres: "",
-      //   apPaterno: "",
-      //   apMaterno: "",
-      //   eMail: "",
-      //   celular: "",
-      //   valoresRadio: ""
-      // });
+      this.colaborador.setValue({
+        numerodocumento: "",
+        usuario: "",
+        fechaEmision: "",
+        dnicliente: "",
+        nombres: "",
+        apellidoPaterno: "",
+        apellidoMaterno: "",
+        correoElectronico: "",
+        telefono: "",
+        condicion: ""
+      });
 
       if(!this.colaborador.valid){
         this.captchavalido=false;

@@ -12,7 +12,7 @@ export class FormularioService {
   constructor(private http: HttpClient) {
   }
 
-    registrarUsuario(model: GanaConYAPE): Observable<any>{
+    registrarUsuario(model: any): Observable<any>{
       return this.http.post('http://200.37.108.23/msusuario/yape/cliente', model);
     }
 
