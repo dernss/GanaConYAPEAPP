@@ -1,12 +1,12 @@
 export class GanaConYAPE{
-        colaborador: {
+        public colaborador: {
                 tipoDocumento: number;
                 numeroDocumento: string;  // dni colaborador 2
                 fechaEmision: Date;
                 usuario: string;
         }
 
-        cliente: {
+        public cliente: {
                  tipoDocumento: number;
                  numeroDocumento: string;  // dni colaborador 2
                  cliente: string; // dni cliente 1

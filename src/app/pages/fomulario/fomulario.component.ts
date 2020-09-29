@@ -20,7 +20,9 @@ export class FomularioComponent implements OnInit {
 
 
   isLinear = false;
+  principal: FormGroup;
   firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
   request: any;
   listaEnvio: any[];
   recaptcha: any[];
@@ -44,20 +46,29 @@ export class FomularioComponent implements OnInit {
 
 
   ngOnInit() {
+  
       this.firstFormGroup = this.formBuilder.group({
         dnicolaborador: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
         cusuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
-        fecemision: new FormControl('', [Validators.required, Validators.nullValidator]),
-        dnicliente: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
-        nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-        apPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-        apMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-        eMail: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-        celular: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
-        valoresRadio: new FormControl('', Validators.required)
-  
+        fecemision: new FormControl('', [Validators.required, Validators.nullValidator])
     });
+    this.secondFormGroup = this.formBuilder.group({
+      dnicliente: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
+      nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+      apPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+      apMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+      eMail: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+      celular: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
+      valoresRadio: new FormControl('', Validators.required)
+    
+  });
     this.captchavalido = false;
+
+    this.principal=this.formBuilder.group({     
+      
+    });
+
+
   }
 
    /*
@@ -78,25 +89,25 @@ export class FomularioComponent implements OnInit {
     return this.firstFormGroup.get('fecemision').invalid && this.firstFormGroup.get('fecemision').touched
   }
   get dniclienteNoValido(){
-    return this.firstFormGroup.get('dnicliente').invalid && this.firstFormGroup.get('dnicliente').touched
+    return this.secondFormGroup.get('dnicliente').invalid && this.secondFormGroup.get('dnicliente').touched
   }
   get nombresNoValido(){
-    return this.firstFormGroup.get('nombres').invalid && this.firstFormGroup.get('nombres').touched
+    return this.secondFormGroup.get('nombres').invalid && this.secondFormGroup.get('nombres').touched
   }
   get apPaternoNoValido(){
-    return this.firstFormGroup.get('apPaterno').invalid && this.firstFormGroup.get('apPaterno').touched
+    return this.secondFormGroup.get('apPaterno').invalid && this.secondFormGroup.get('apPaterno').touched
   }
   get apMaternoNoValido(){
-    return this.firstFormGroup.get('apMaterno').invalid && this.firstFormGroup.get('apMaterno').touched
+    return this.secondFormGroup.get('apMaterno').invalid && this.secondFormGroup.get('apMaterno').touched
   }
   get eMailNoValido(){
-    return this.firstFormGroup.get('eMail').invalid && this.firstFormGroup.get('eMail').touched
+    return this.secondFormGroup.get('eMail').invalid && this.secondFormGroup.get('eMail').touched
   }
   get celularNoValido(){
-    return this.firstFormGroup.get('celular').invalid && this.firstFormGroup.get('celular').touched
+    return this.secondFormGroup.get('celular').invalid && this.secondFormGroup.get('celular').touched
   } 
   get valoresRadioNoValido(){
-    return this.firstFormGroup.get('valoresRadio').invalid && this.firstFormGroup.get('valoresRadio').pristine
+    return this.secondFormGroup.get('valoresRadio').invalid && this.secondFormGroup.get('valoresRadio').pristine
   } 
 
 
@@ -113,14 +124,14 @@ export class FomularioComponent implements OnInit {
       if (this.firstFormGroup.value.dnicolaborador != '' && 
           this.firstFormGroup.value.fecemision != '' &&
           this.firstFormGroup.value.cusuario != '' &&
-          this.firstFormGroup.value.dnicliente != '' &&
-          this.firstFormGroup.value.nombres != '' &&
-          this.firstFormGroup.value.apPaterno != '' &&
-          this.firstFormGroup.value.apMaterno != '' &&
-          this.firstFormGroup.value.celular != '' &&
-          this.firstFormGroup.value.eMail != '' &&
-          this.firstFormGroup.value.celular != '' &&
-          this.firstFormGroup.value.valoresRadio != ''){
+          this.secondFormGroup.value.dnicliente != '' &&
+          this.secondFormGroup.value.nombres != '' &&
+          this.secondFormGroup.value.apPaterno != '' &&
+          this.secondFormGroup.value.apMaterno != '' &&
+          this.secondFormGroup.value.celular != '' &&
+          this.secondFormGroup.value.eMail != '' &&
+          this.secondFormGroup.value.celular != '' &&
+          this.secondFormGroup.value.valoresRadio != ''){
         this.captchavalido = true;
       }
     }
@@ -128,24 +139,25 @@ export class FomularioComponent implements OnInit {
 
 
 onSubmit(): void{
-  //this.formularioService.registrarUsuario2(this.model)
-  //.subscribe(() =>{console.log("Registro Correcto");})
+  // this.formularioService.registrarUsuario2(this.model)
+  // .subscribe(() =>{console.log("Registro Correcto");})
   
-   //this.model.colaborador.tipoDocumento = 1;
-   //this.model.colaborador.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
-   this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
-   this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
+  //  this.model.colaborador.tipoDocumento = 1;
+  //  this.model.colaborador.numeroDocumento = this.firstFormGroup.value.dnicolaborador;
+   
+  //  this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
+  //  this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
 
    //this.model.cliente.tipoDocumento = 1;
    //this.model.cliente.numeroDocumento = this.firstFormGroup.value.dnicliente;
-   this.model.cliente.nombres = this.firstFormGroup.value.nombres;
-   this.model.cliente.apellidoPaterno = this.firstFormGroup.value.apPaterno;
+  //  this.model.cliente.nombres = this.firstFormGroup.value.nombres;
+  //  this.model.cliente.apellidoPaterno = this.firstFormGroup.value.apPaterno;
   //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
   //  this.model.telefono = this.firstFormGroup.value.celular;
   //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
   //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
   //  this.model.recaptchaResponse = this.captcha;
-  console.log(this.model);
+  console.log(this.firstFormGroup.value,this.secondFormGroup.value);
   
   
 }
