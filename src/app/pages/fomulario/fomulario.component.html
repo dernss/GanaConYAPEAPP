@@ -21,7 +21,7 @@
 </button> -->
 <mat-vertical-stepper [linear]="isLinear" #stepper>
 
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="principal">
         <form [formGroup]="principal" (ngSubmit)="onSubmit()">
 
             <form [formGroup]="firstFormGroup">

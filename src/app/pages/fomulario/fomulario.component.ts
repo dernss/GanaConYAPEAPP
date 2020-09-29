@@ -20,7 +20,26 @@ export class FomularioComponent implements OnInit {
 
 
   isLinear = false;
-  principal: FormGroup;
+  principal = new FormGroup({
+    firstFormGroup:  new FormGroup({
+
+        dnicolaborador: new FormControl(''),
+        cusuario: new FormControl(''),
+        fecemision: new FormControl('')
+    }),
+    secondFormGroup:  new FormGroup({
+
+      dnicliente: new FormControl(''),
+      nombres: new FormControl(''),
+      apPaterno: new FormControl(''),
+      apMaterno: new FormControl(''),
+      eMail: new FormControl(''),
+      celular: new FormControl(''),
+      valoresRadio: new FormControl('')
+  })
+    
+});
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   request: any;
@@ -46,8 +65,9 @@ export class FomularioComponent implements OnInit {
 
 
   ngOnInit() {
+   
   
-      this.firstFormGroup = this.formBuilder.group({
+     this.firstFormGroup = this.formBuilder.group({
         dnicolaborador: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
         cusuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
         fecemision: new FormControl('', [Validators.required, Validators.nullValidator])
@@ -62,11 +82,12 @@ export class FomularioComponent implements OnInit {
       valoresRadio: new FormControl('', Validators.required)
     
   });
+
+
+  
     this.captchavalido = false;
 
-    this.principal=this.formBuilder.group({     
-      
-    });
+    
 
 
   }
@@ -157,7 +178,12 @@ onSubmit(): void{
   //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
   //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
   //  this.model.recaptchaResponse = this.captcha;
-  console.log(this.firstFormGroup.value,this.secondFormGroup.value);
+  //console.log(this.firstFormGroup.value,this.secondFormGroup.value);
+
+
+  console.log(this.principal.get("firstFormGroup").value);
+  console.log('modal-headere');
+  console.log(this.firstFormGroup.value);
   
   
 }
