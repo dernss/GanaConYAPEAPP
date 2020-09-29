@@ -42,11 +42,12 @@
                 &nbsp;
                 <small *ngIf="usuarioNoValido" class="text-danger">Ingrese Usuario </small>
                 <br>
+
                 <mat-form-field appearance="fill">
                     <mat-label>Fecha Emisión</mat-label>
-                    <input matInput [matDatepicker]="picker2" [(ngModel)]="picker2.fecha | date: 'yyyy/MM/dd'" formControlName="fechaEmision" [class.is-invalid]="fechaNoValido">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                    <input matInput [matDatepicker]="picker1" formControlName="fechaEmision" [class.is-invalid]="fechaNoValido" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 </mat-form-field>
                 &nbsp;
                 <small *ngIf="fechaNoValido" class="text-danger">Fecha Inválida </small>

@@ -162,52 +162,89 @@ export class FomularioComponent implements OnInit {
 onSubmit(): void{
 
   this.jsonService = {};
-  this.jsonService.colaborador = this.colaborador.value;
+  this.jsonService.colaborador = this.colaborador.value;  
   this.jsonService.colaborador.tipoDocumento = 1 ;
   this.jsonService.cliente = this.cliente.value;
   this.jsonService.cliente.tipoDocumento = 1 ;
 
-  this.colaborador.reset({
-    numerodocumento: "",
+  this.colaborador.value.fechaEmision = this.formularioService.formatDate(this.colaborador.value.fechaEmision);
+
+  this.formularioService.registrarUsuario(this.jsonService)
+  .subscribe(() =>{console.log("Registro Correcto");})
+  
+  this.colaborador.setValue({
+    numeroDocumento: "",
     usuario: "",
     fechaEmision: "",
-
   });
 
-
-     console.log(this.jsonService);
-
-
-    this.formularioService.registrarUsuario(this.jsonService)
-    .subscribe(() =>{console.log("Registro Correcto");})
-
-  
+  this.cliente.setValue({
+    numeroDocumento: "",
+    nombres: "",
+    apellidoPaterno: "",
+    apellidoMaterno: "",
+    correoElectronico: "",
+    telefono: "",
+    condicion: ""
+  });
+    
+  if(!this.colaborador.valid){
+    this.captchavalido=false;
+    grecaptcha.reset();     
+  }
+    
+    this.colaborador.markAsUntouched();
+    this.cliente.markAsUntouched();
+    this.principal.markAsUntouched();
+    this.colaborador.markAsPristine();
+    this.cliente.markAsPristine();
+    this.principal.markAsPristine();
   
 }
 
-    enviar():void{
+    // enviar():void{
        
          
-       this.formularioService.registrarUsuario(this.model)
-              .subscribe(() =>{console.log("Registro Correcto");})
-      this.colaborador.setValue({
-        numerodocumento: "",
-        usuario: "",
-        fechaEmision: "",
-        dnicliente: "",
-        nombres: "",
-        apellidoPaterno: "",
-        apellidoMaterno: "",
-        correoElectronico: "",
-        telefono: "",
-        condicion: ""
-      });
+    //    this.formularioService.registrarUsuario(this.model)
+    //           .subscribe(() =>{console.log("Registro Correcto");})
+    //   this.colaborador.setValue({
+    //     numerodocumento: "",
+    //     usuario: "",
+    //     fechaEmision: "",
+    //     numeroDocumento: "",
+    //     nombres: "",
+    //     apellidoPaterno: "",
+    //     apellidoMaterno: "",
+    //     correoElectronico: "",
+    //     telefono: "",
+    //     condicion: ""
+    //   });
 
-      if(!this.colaborador.valid){
-        this.captchavalido=false;
-        grecaptcha.reset();     
-      }
+    //   if(!this.colaborador.valid){
+    //     this.captchavalido=false;
+    //     grecaptcha.reset();     
+    //   }
 
-     }
+    //  }
 
+   
 }
+
+
+
+  // this.formularioService.registrarUsuario2(this.model)
+  // .subscribe(() =>{console.log("Registro Correcto");})
+
+  //  this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
+  //  this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
+
+  //this.model.cliente.tipoDocumento = 1;
+  //this.model.cliente.numeroDocumento = this.firstFormGroup.value.dnicliente;
+  //  this.model.cliente.nombres = this.firstFormGroup.value.nombres;
+  //  this.model.cliente.apellidoPaterno = this.firstFormGroup.value.apPaterno;
+  //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
+  //  this.model.telefono = this.firstFormGroup.value.celular;
+  //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
+  //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
+  //  this.model.recaptchaResponse = this.captcha;
+  //console.log(this.firstFormGroup.value,this.secondFormGroup.value);
