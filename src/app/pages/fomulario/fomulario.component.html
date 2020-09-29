@@ -24,27 +24,27 @@
     <mat-step [stepControl]="principal">
         <form [formGroup]="principal" (ngSubmit)="onSubmit()">
 
-            <form [formGroup]="firstFormGroup">
+            <form [formGroup]="colaborador">
                 <ng-template matStepLabel>REGISTRO </ng-template>
                 <h1 class="h1">COLABORADOR</h1>
                 <div>
                     <mat-form-field>
                         <mat-label>DNI Colaborador</mat-label>
-                        <input type="text" matInput formControlName="dnicolaborador" [class.is-invalid]="dniNoValido" maxLength="8">
+                        <input type="text" matInput formControlName="numeroDocumento" [class.is-invalid]="dniNoValido" maxLength="8">
                     </mat-form-field>
                     &nbsp;
                     <small *ngIf="dniNoValido" class="text-danger">Ingrese Nro DNI </small>
                 </div>
                 <mat-form-field>
                     <mat-label>Usuario</mat-label>
-                    <input type="text" matInput formControlName="cusuario" [class.is-invalid]="usuarioNoValido" maxLength="4">
+                    <input type="text" matInput formControlName="usuario" [class.is-invalid]="usuarioNoValido" maxLength="4">
                 </mat-form-field>
                 &nbsp;
                 <small *ngIf="usuarioNoValido" class="text-danger">Ingrese Usuario </small>
                 <br>
                 <mat-form-field appearance="fill">
                     <mat-label>Fecha Emisión</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="fecemision" [class.is-invalid]="fechaNoValido">
+                    <input matInput [matDatepicker]="picker2" formControlName="fechaEmision" [class.is-invalid]="fechaNoValido">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2 color="primary"></mat-datepicker>
                 </mat-form-field>
@@ -54,11 +54,11 @@
                     &nbsp;
                 </div>
             </form>
-            <form [formGroup]="secondFormGroup">
+            <form [formGroup]="cliente">
                 <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
                 <mat-form-field>
                     <mat-label>DNI Cliente</mat-label>
-                    <input matInput name="dni" formControlName="dnicliente" [class.is-invalid]="dniclienteNoValido" maxLength="8">
+                    <input matInput name="dni" formControlName="numeroDocumento" [class.is-invalid]="dniclienteNoValido" maxLength="8">
 
                 </mat-form-field>
                 &nbsp;
