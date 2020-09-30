@@ -149,7 +149,7 @@ onSubmit(): void{
   //    allowOutsideClick: false
   // });
   
-  Swal.showLoading();
+  // Swal.showLoading();
 
   this.jsonService = {};
   this.jsonService.colaborador = this.colaborador.value;
@@ -163,7 +163,7 @@ onSubmit(): void{
 
   
   
-  console.log(this.jsonService);
+  // console.log(this.jsonService);
 
   this.formularioService.registrarUsuario(this.jsonService)
   .subscribe(resp =>{ console.log(resp);
