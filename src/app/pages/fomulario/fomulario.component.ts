@@ -5,6 +5,8 @@ import { GanaConYAPE } from '../../Model/formulario';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Moment } from 'moment';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -37,7 +39,6 @@ export class FomularioComponent implements OnInit {
       telefono: new FormControl(''),
       condicion: new FormControl('')
   })
-    
 });
 
   colaborador: FormGroup;
@@ -60,46 +61,26 @@ export class FomularioComponent implements OnInit {
               private formularioService: FormularioService,
               ){
                 this.validated_captcha = false;
-               
               }
 
-
-
   ngOnInit() {
-   
-  
      this.colaborador = this.formBuilder.group({
         numeroDocumento: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
         usuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
-        fechaEmision: new FormControl('', [Validators.required, Validators.nullValidator])
+        fechaEmision: new FormControl('', [ Validators.required, Validators.nullValidator])
+       // fechaEmision : [moment(),Validators.required] 
     });
-    this.cliente = this.formBuilder.group({
-      numeroDocumento: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
-      nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-      apellidoPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-      apellidoMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-      correoElectronico: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      telefono: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
-      condicion: new FormControl('', Validators.required)
-    
-  });
-
-
-  
+      this.cliente = this.formBuilder.group({
+          numeroDocumento: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
+          nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+          apellidoPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+          apellidoMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
+          correoElectronico: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
+          telefono: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
+          condicion: new FormControl('', Validators.required)
+  });  
     this.captchavalido = false;
-
-    
-
-
   }
-
-   /*
-    if (this.firstFormGroup.valid && this.captcha != null)
-      this.captchavalido = true;
-    */
-
-
- 
 
   get dniNoValido(){
     return this.colaborador.get('numeroDocumento').invalid && this.colaborador.get('numeroDocumento').touched
@@ -141,7 +122,6 @@ export class FomularioComponent implements OnInit {
     resolver(response){
 
       this.captcha = response;
-      
 
       if (this.colaborador.value.numeroDocumento != '' && 
           this.colaborador.value.fechaEmision != '' &&
@@ -160,18 +140,43 @@ export class FomularioComponent implements OnInit {
 
 
 onSubmit(): void{
+  
+
+  // Swal.fire({
+  //    title: 'Odio aqui',
+  //    text:  'te odio a ti',
+    
+  //    allowOutsideClick: false
+  // });
+  
+  Swal.showLoading();
 
   this.jsonService = {};
-  this.jsonService.colaborador = this.colaborador.value;  
+  this.jsonService.colaborador = this.colaborador.value;
   this.jsonService.colaborador.tipoDocumento = 1 ;
   this.jsonService.cliente = this.cliente.value;
   this.jsonService.cliente.tipoDocumento = 1 ;
+  // this.jsonService.codigoRespuesta = '';
+  // this.jsonService.mensajeRespuesta = '';
 
   this.colaborador.value.fechaEmision = this.formularioService.formatDate(this.colaborador.value.fechaEmision);
 
-  this.formularioService.registrarUsuario(this.jsonService)
-  .subscribe(() =>{console.log("Registro Correcto");})
   
+  
+  console.log(this.jsonService);
+
+  this.formularioService.registrarUsuario(this.jsonService)
+  .subscribe(resp =>{ console.log(resp);
+  // Swal.fire({
+  //   title: resp.codigoRespuesta,
+  //   text:  resp.mensajeRespuesta,
+  //   allowOutsideClick: false
+  //  });
+
+  })
+  
+  // console.log(this.jsonService);
+
   this.colaborador.setValue({
     numeroDocumento: "",
     usuario: "",
