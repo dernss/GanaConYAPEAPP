@@ -1,160 +1,187 @@
 <h4><small> </small> </h4>
-<p>
-    <mat-toolbar color="primary">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-        <span>GANA CON YAPE</span>
-        <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
-    </mat-toolbar>
-</p>
+
 
 
 <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button> -->
-<mat-vertical-stepper [linear]="isLinear" #stepper>
-
-    <mat-step [stepControl]="principal">
-        <form [formGroup]="principal" (ngSubmit)="onSubmit()">
-
-            <div [formGroup]="colaborador">
-                <ng-template matStepLabel>REGISTRO </ng-template>
-                <h1 class="h1">COLABORADOR</h1>
-                <div>
-                    <mat-form-field>
-                        <mat-label>DNI Colaborador</mat-label>
-                        <input type="text" matInput formControlName="numeroDocumento" [class.is-invalid]="dniNoValido" maxLength="8">
-                    </mat-form-field>
-                    &nbsp;
-                    <small *ngIf="dniNoValido" class="text-danger">Ingrese Nro DNI </small>
+<div class='container'>
+    <div class="row my-3 justify-content-center">
+        <mat-card>
+            <mat-card-header>
+                <div class="footer-copyright text-center py-3">
+                    <img mat-card-image SRC="assets\IMG\cmac-yape.jpg">
                 </div>
-                <mat-form-field>
-                    <mat-label>Usuario</mat-label>
-                    <input type="text" matInput formControlName="usuario" [class.is-invalid]="usuarioNoValido" maxLength="4">
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="usuarioNoValido" class="text-danger">Ingrese Usuario </small>
-                <br>
+            </mat-card-header>
+            <p>
+                <mat-toolbar color="primary">
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                    <span>GANA CON YAPE</span>
+                    <span class="example-spacer"></span>
+                    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                    <mat-icon>favorite</mat-icon>
+                  </button>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                    <mat-icon>share</mat-icon>
+                  </button>
+                </mat-toolbar>
+            </p>
+            <mat-card-content>
+                <mat-vertical-stepper [linear]="isLinear" #stepper>
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Fecha Emisión</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="fechaEmision" [class.is-invalid]="fechaNoValido" disabled>
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1 disabled="false"></mat-datepicker>
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="fechaNoValido" class="text-danger">Fecha Inválida </small>
-                <div>
-                    &nbsp;
-                </div>
-            </div>
-            <div [formGroup]="cliente">
-                <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
-                <mat-form-field>
-                    <mat-label>DNI Cliente</mat-label>
-                    <input matInput name="dni" formControlName="numeroDocumento" [class.is-invalid]="dniclienteNoValido" maxLength="8">
+                    <mat-step [stepControl]="principal">
+                        <form [formGroup]="principal" (ngSubmit)="onSubmit()">
 
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="dniclienteNoValido" class="text-danger">Ingrese DNI Cliente </small>
-                <br>
-                <mat-form-field>
-                    <mat-label>Nombres</mat-label>
-                    <input matInput name="nombres" formControlName="nombres" [class.is-invalid]="nombresNoValido">
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="nombresNoValido" class="text-danger">Ingrese Nombre Cliente </small>
-                <br>
-                <mat-form-field>
-                    <mat-label>Apellido Paterno</mat-label>
-                    <input matInput name="apellidoPaterno" formControlName="apellidoPaterno" [class.is-invalid]="apPaternoNoValido">
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="apPaternoNoValido" class="text-danger">Ingrese Apellido Paterno Cliente </small>
-                <br>
-                <mat-form-field>
-                    <mat-label>Apellido Materno</mat-label>
-                    <input matInput name="apellidoMaterno" formControlName="apellidoMaterno" [class.is-invalid]="apMaternoNoValido">
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="apMaternoNoValido" class="text-danger">Ingrese Apellido Materno Cliente </small>
-                <br>
-                <mat-form-field>
-                    <mat-label>Correo Electrónico</mat-label>
-                    <input type="correoElectronico" matInput name="correoElectronico" formControlName="correoElectronico" [class.is-invalid]="eMailNoValido">
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="eMailNoValido" class="text-danger">Ingrese Correo Electrónico Cliente </small>
-                <br>
-                <mat-form-field>
-                    <mat-label>Celular</mat-label>
-                    <input matInput name="telefono" formControlName="telefono" [class.is-invalid]="celularNoValido" maxLength="9">
-                </mat-form-field>
-                &nbsp;
-                <small *ngIf="celularNoValido" class="text-danger">Ingrese Celular Cliente </small>
-                <br>
-                <mat-radio-group formControlName="condicion" [class.is-invalid]="valoresRadioNoValido">
-                    <mat-radio-button class="example-margin" value="1">Cliente</mat-radio-button>
-                    &nbsp;
-                    <mat-radio-button class="example-margin" value="2">Comercio</mat-radio-button>
-                    &nbsp;
-                    <small *ngIf="valoresRadioNoValido" class="text-danger">Escoja una Opción </small>
-                </mat-radio-group>
-                <br>
-                <br>
-                <mat-label>* El Cliente debe tener activo la opción de compras por internet</mat-label>
-                <br>
-                <div>
-                    &nbsp;
-                </div>
-                <div class="recaptcha">
-                    <re-captcha (resolved)="resolver($event)" siteKey="6Lduns0ZAAAAAJD5RpE5iToJRbDu9KNgdo_Ftgo8">
+                            <div [formGroup]="colaborador">
+                                <ng-template matStepLabel>REGISTRO </ng-template>
+                                <h1 class="h1">COLABORADOR</h1>
+                                <div>
+                                    <i class="material-icons align-middle ">contacts </i>
+                                    <mat-form-field>
+                                        <mat-label>DNI Colaborador</mat-label>
+                                        <input type="text" matInput formControlName="numeroDocumento" [class.is-invalid]="dniNoValido" maxLength="8">
+                                    </mat-form-field>
+                                    &nbsp;
+                                    <small *ngIf="dniNoValido" class="text-danger">Ingrese Nro DNI </small>
+                                </div>
+                                <i class="material-icons align-middle ">person</i>
+                                <mat-form-field>
+                                    <mat-label>Usuario</mat-label>
+                                    <input type="text" matInput formControlName="usuario" [class.is-invalid]="usuarioNoValido" maxLength="4">
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="usuarioNoValido" class="text-danger">Ingrese Usuario </small>
+                                <!-- <br>
 
-                    </re-captcha>
-                </div>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Fecha Emisión</mat-label>
+                                    <input matInput [matDatepicker]="picker1" formControlName="fechaEmision" [class.is-invalid]="fechaNoValido" disabled>
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="fechaNoValido" class="text-danger">Fecha Inválida </small>
+                                <div>
+                                    &nbsp;
+                                </div> -->
+                            </div>
+                            <div [formGroup]="cliente">
+                                <h1 class="h1">DATOS PERSONALES CLIENTE</h1>
+                                <i class="material-icons align-middle ">contacts </i>
+                                <mat-form-field>
 
-                <br>
-                <div>
-                    <button mat-raised-button color="primary" Name="btnenviar" (click)="onSubmit()" [disabled]="!captchavalido ">ENVIAR</button>
-                </div>
-                <div>
-                    &nbsp;
-                </div>
+                                    <mat-label>DNI Cliente</mat-label>
+                                    <input matInput name="dni" formControlName="numeroDocumento" [class.is-invalid]="dniclienteNoValido" maxLength="8">
 
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="dniclienteNoValido" class="text-danger">Ingrese DNI Cliente </small>
+                                <br>
+                                <i class="material-icons align-middle ">person</i>
+                                <mat-form-field>
+                                    <mat-label>Nombres</mat-label>
+                                    <input matInput name="nombres" formControlName="nombres" [class.is-invalid]="nombresNoValido">
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="nombresNoValido" class="text-danger">Ingrese Nombre Cliente </small>
+                                <br>
+                                <i class="material-icons align-middle ">person</i>
+                                <mat-form-field>
+                                    <mat-label>Apellido Paterno</mat-label>
+                                    <input matInput name="apellidoPaterno" formControlName="apellidoPaterno" [class.is-invalid]="apPaternoNoValido">
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="apPaternoNoValido" class="text-danger">Ingrese Apellido Paterno Cliente </small>
+                                <br>
+                                <i class="material-icons align-middle ">person</i>
+                                <mat-form-field>
+                                    <mat-label>Apellido Materno</mat-label>
+                                    <input matInput name="apellidoMaterno" formControlName="apellidoMaterno" [class.is-invalid]="apMaternoNoValido">
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="apMaternoNoValido" class="text-danger">Ingrese Apellido Materno Cliente </small>
+                                <br>
+                                <i class="material-icons align-middle ">email</i>
+                                <mat-form-field>
+                                    <mat-label>Correo Electrónico</mat-label>
+                                    <input type="correoElectronico" matInput name="correoElectronico" formControlName="correoElectronico" [class.is-invalid]="eMailNoValido">
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="eMailNoValido" class="text-danger">Ingrese Correo Electrónico Cliente </small>
+                                <br>
+                                <i class="material-icons align-middle ">local_phone</i>
+                                <mat-form-field>
+                                    <mat-label>Celular</mat-label>
+                                    <input matInput name="telefono" formControlName="telefono" [class.is-invalid]="celularNoValido" maxLength="9">
+                                </mat-form-field>
+                                &nbsp;
+                                <small *ngIf="celularNoValido" class="text-danger">Ingrese Celular Cliente </small>
+                                <br>
+                                <mat-radio-group formControlName="condicion" [class.is-invalid]="valoresRadioNoValido">
+                                    <mat-radio-button class="example-margin" value="1">Cliente</mat-radio-button>
+                                    &nbsp;
+                                    <mat-radio-button class="example-margin" value="2">Comercio</mat-radio-button>
+                                    &nbsp;
+                                    <small *ngIf="valoresRadioNoValido" class="text-danger">Elija una Opción </small>
+                                </mat-radio-group>
+                                <br>
+                                <br>
+                                <mat-label>* El Cliente debe tener activo la opción de compras por internet</mat-label>
+                                <br>
+                                <div>
+                                    &nbsp;
+                                </div>
+                                <div class="recaptcha">
+                                    <re-captcha (resolved)="resolver($event)" siteKey="6Lduns0ZAAAAAJD5RpE5iToJRbDu9KNgdo_Ftgo8">
 
-            </div>
-        </form>
+                                    </re-captcha>
+                                </div>
 
-        <!-- <hr>
-        <pre>
-            Estado del formulario: {{firstFormGroup.valid}}
+                                <br>
+
+                                <div>
+                                    <button mat-raised-button color="primary" Name="btnenviar" (click)="onSubmit()" [disabled]=" cliente.invalid || colaborador.invalid ||!captchavalido ">ENVIAR</button>
+                                </div>
+                                <div class="row mt-4" *ngIf="cliente.invalid || colaborador.invalid ">
+                                    <div class="col text-left">
+                                        <span class="text-danger  size12">
+                            <i class="material-icons mr-1 align-middle">warning</i>Verifique que la información sea correcta para registrar solicitud.
+                          </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <!-- <hr>
+            <pre>
+            Estado del formulario col: {{colaborador.valid}}
+            Estado del formulario clie: {{cliente.valid}}
             <br>
-            Status : {{firstFormGroup.status}}
+            Status col: {{colaborador.status}}
+            Status cli: {{cliente.status}}
         </pre>
-        <pre>
-            {{firstFormGroup.value | json}}
+            <pre>
+            {{principal.value | json}}
         </pre> -->
 
-    </mat-step>
+                    </mat-step>
+                </mat-vertical-stepper>
+            </mat-card-content>
+            <mat-card-footer class="page-footer font-small blue">
 
+                <!-- <img mat-card-image SRC="assets\IMG\caja-cusco-imagen.png"> -->
 
-
-</mat-vertical-stepper>
-<mat-card-footer class="page-footer font-small blue">
-    <div class="footer-copyright text-center py-3">
-        <img mat-card-image SRC="assets\IMG\caja-cusco-imagen2.png">
+                <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                    <a href="https://www.cmac-cusco.com.pe/"> cmac-cusco.com.pe</a>
+                </div>
+            </mat-card-footer>
+        </mat-card>
     </div>
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href="https://www.cmac-cusco.com.pe/"> cmac-cusco.com.pe</a>
-    </div>
-</mat-card-footer>
+</div>
+
 
 <script>
     function onSubmit(token) {

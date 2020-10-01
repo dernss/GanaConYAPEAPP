@@ -26,8 +26,8 @@ export class FomularioComponent implements OnInit {
     colaborador:  new FormGroup({
 
         numeroDocumento: new FormControl(''),
-        usuario: new FormControl(''),
-        fechaEmision: new FormControl('')
+        usuario: new FormControl('')
+       // fechaEmision: new FormControl('')
     }),
     cliente:  new FormGroup({
 
@@ -65,18 +65,18 @@ export class FomularioComponent implements OnInit {
 
   ngOnInit() {
      this.colaborador = this.formBuilder.group({
-        numeroDocumento: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
-        usuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)]),
-        fechaEmision: new FormControl('', [ Validators.required, Validators.nullValidator])
-       // fechaEmision : [moment(),Validators.required] 
+        numeroDocumento: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('([0-9]*){8}')]),
+        usuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.pattern('([a-zA-Z]*){4}')])
+        // fechaEmision: new FormControl('', [ Validators.required, Validators.nullValidator])
+       // fechaEmision : [moment(),Validators.required]  
     });
       this.cliente = this.formBuilder.group({
-          numeroDocumento: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]),
-          nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-          apellidoPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-          apellidoMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3)]),
-          correoElectronico: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-          telefono: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]),
+          numeroDocumento: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8), Validators.pattern('([0-9]*){8}')]),
+          nombres: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3), Validators.pattern('[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?)*')]),
+          apellidoPaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3), Validators.pattern('[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?)*')]),
+          apellidoMaterno: new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(3), Validators.pattern('[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?)*')]),
+          correoElectronico: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@([_a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,3}$')]),
+          telefono: new FormControl('', [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern('([0-9]*){9}')]),
           condicion: new FormControl('', Validators.required)
   });  
     this.captchavalido = false;
@@ -88,9 +88,9 @@ export class FomularioComponent implements OnInit {
   get usuarioNoValido(){
     return this.colaborador.get('usuario').invalid && this.colaborador.get('usuario').touched
   }
-  get fechaNoValido(){
-    return this.colaborador.get('fechaEmision').invalid && this.colaborador.get('fechaEmision').touched
-  }
+  // get fechaNoValido(){
+  //   return this.colaborador.get('fechaEmision').invalid && this.colaborador.get('fechaEmision').touched
+  // }
   get dniclienteNoValido(){
     return this.cliente.get('numeroDocumento').invalid && this.cliente.get('numeroDocumento').touched
   }
@@ -124,7 +124,7 @@ export class FomularioComponent implements OnInit {
       this.captcha = response;
 
       if (this.colaborador.value.numeroDocumento != '' && 
-          this.colaborador.value.fechaEmision != '' &&
+          //this.colaborador.value.fechaEmision != '' &&
           this.colaborador.value.usuario != '' &&
           this.cliente.value.numeroDocumento != '' &&
           this.cliente.value.nombres != '' &&
@@ -159,28 +159,34 @@ onSubmit(): void{
   // this.jsonService.codigoRespuesta = '';
   // this.jsonService.mensajeRespuesta = '';
 
-  this.colaborador.value.fechaEmision = this.formularioService.formatDate(this.colaborador.value.fechaEmision);
+  //this.colaborador.value.fechaEmision = this.formularioService.formatDate(this.colaborador.value.fechaEmision);
 
   
   
   // console.log(this.jsonService);
 
   this.formularioService.registrarUsuario(this.jsonService)
-  .subscribe(resp =>{ console.log(resp);
-  // Swal.fire({
-  //   title: resp.codigoRespuesta,
-  //   text:  resp.mensajeRespuesta,
-  //   allowOutsideClick: false
-  //  });
-
-  })
-  
+  .subscribe(
+    //data => console.log('success', data),
+    data => Swal.fire({
+      title: 'Confirmación',
+      text:  data.mensajeRespuesta,
+      allowOutsideClick: false
+     }),
+    //error => console.log('oops', error.error)
+    error => 
+            Swal.fire({
+              title: 'Observación',
+              text:  error.error.mensajeRespuesta,
+              allowOutsideClick: false
+             })
+  )
   // console.log(this.jsonService);
 
   this.colaborador.setValue({
     numeroDocumento: "",
-    usuario: "",
-    fechaEmision: "",
+    usuario: ""
+    //fechaEmision: "",
   });
 
   this.cliente.setValue({
