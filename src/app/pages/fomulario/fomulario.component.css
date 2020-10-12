@@ -63,3 +63,8 @@ body {
 mat-form-field {
     margin-right: 12px;
 }
+
+.mat-card {
+    background: #fff;
+    color: rgba(0, 0, 0, .87);
+}

@@ -5,7 +5,7 @@ import { GanaConYAPE } from '../../Model/formulario';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Moment } from 'moment';
+import * as moment from 'moment'; // add this 1 of 4
 import Swal from 'sweetalert2';
 
 
@@ -53,8 +53,7 @@ export class FomularioComponent implements OnInit {
   indeterminate = false;
   labelPosition: 'before' | 'after' = 'after';
 
-  fecha = new Date();
-
+  fecha = new Date('01/01/2020');
 
 
   constructor(private formBuilder: FormBuilder,
@@ -67,8 +66,7 @@ export class FomularioComponent implements OnInit {
      this.colaborador = this.formBuilder.group({
         numeroDocumento: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('([0-9]*){8}')]),
         usuario: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.pattern('([a-zA-Z]*){4}')])
-        // fechaEmision: new FormControl('', [ Validators.required, Validators.nullValidator])
-       // fechaEmision : [moment(),Validators.required]  
+     
     });
       this.cliente = this.formBuilder.group({
           numeroDocumento: new FormControl('', [Validators.required, Validators.maxLength(8), Validators.minLength(8), Validators.pattern('([0-9]*){8}')]),
@@ -80,6 +78,8 @@ export class FomularioComponent implements OnInit {
           condicion: new FormControl('', Validators.required)
   });  
     this.captchavalido = false;
+
+    
   }
 
   get dniNoValido(){
@@ -141,39 +141,23 @@ export class FomularioComponent implements OnInit {
 
 onSubmit(): void{
   
-
-  // Swal.fire({
-  //    title: 'Odio aqui',
-  //    text:  'te odio a ti',
-    
-  //    allowOutsideClick: false
-  // });
   
-  // Swal.showLoading();
-
   this.jsonService = {};
   this.jsonService.colaborador = this.colaborador.value;
   this.jsonService.colaborador.tipoDocumento = 1 ;
   this.jsonService.cliente = this.cliente.value;
   this.jsonService.cliente.tipoDocumento = 1 ;
-  // this.jsonService.codigoRespuesta = '';
-  // this.jsonService.mensajeRespuesta = '';
 
-  //this.colaborador.value.fechaEmision = this.formularioService.formatDate(this.colaborador.value.fechaEmision);
 
-  
-  
-  // console.log(this.jsonService);
+  this.colaborador.value.fechaEmision = this.formularioService.formatDate();
 
   this.formularioService.registrarUsuario(this.jsonService)
   .subscribe(
-    //data => console.log('success', data),
     data => Swal.fire({
       title: 'Confirmación',
       text:  data.mensajeRespuesta,
       allowOutsideClick: false
      }),
-    //error => console.log('oops', error.error)
     error => 
             Swal.fire({
               title: 'Observación',
@@ -213,49 +197,4 @@ onSubmit(): void{
   
 }
 
-    // enviar():void{
-       
-         
-    //    this.formularioService.registrarUsuario(this.model)
-    //           .subscribe(() =>{console.log("Registro Correcto");})
-    //   this.colaborador.setValue({
-    //     numerodocumento: "",
-    //     usuario: "",
-    //     fechaEmision: "",
-    //     numeroDocumento: "",
-    //     nombres: "",
-    //     apellidoPaterno: "",
-    //     apellidoMaterno: "",
-    //     correoElectronico: "",
-    //     telefono: "",
-    //     condicion: ""
-    //   });
-
-    //   if(!this.colaborador.valid){
-    //     this.captchavalido=false;
-    //     grecaptcha.reset();     
-    //   }
-
-    //  }
-
-   
 }
-
-
-
-  // this.formularioService.registrarUsuario2(this.model)
-  // .subscribe(() =>{console.log("Registro Correcto");})
-
-  //  this.model.colaborador.fechaEmision =  this.firstFormGroup.value.fecemision;
-  //  this.model.colaborador.usuario = this.firstFormGroup.value.cusuario;
-
-  //this.model.cliente.tipoDocumento = 1;
-  //this.model.cliente.numeroDocumento = this.firstFormGroup.value.dnicliente;
-  //  this.model.cliente.nombres = this.firstFormGroup.value.nombres;
-  //  this.model.cliente.apellidoPaterno = this.firstFormGroup.value.apPaterno;
-  //  this.model.apmaterno = this.firstFormGroup.value.apMaterno;
-  //  this.model.telefono = this.firstFormGroup.value.celular;
-  //  this.model.correoElectronico = this.firstFormGroup.value.eMail;
-  //  this.model.condicion = this.firstFormGroup.value.valoresRadio;
-  //  this.model.recaptchaResponse = this.captcha;
-  //console.log(this.firstFormGroup.value,this.secondFormGroup.value);

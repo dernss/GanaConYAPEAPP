@@ -17,22 +17,18 @@ export class FormularioService {
 
   constructor(private http: HttpClient) {
   }
-  // como hago backstich ? porque tu model es any ?
+
     // http://200.37.108.23/msusuario/yape/cliente
     registrarUsuario(model: any): Observable<any>{
       //return this.http.post('http://200.37.108.23/msusuario/yape/cliente', model)
       return this.http.post(`${environment.apiUrl}msusuario/yape/cliente`, model);
-      // .pipe(
-      //   map((resp:any) =>{
-      //     model.codigoRespuesta = resp.codigoRespuesta;
-      //     model.mensajeRespuesta  = resp.mensajeRespuesta;
-      //   })
-      // );
+  
     }
 
     
     validarColaborador(model: GanaConYAPE): Observable<any>{
-        return this.http.post('http://200.37.108.23/msusuario/yape/colaborador', model);
+        return this.http.post('http://200.37.108.23/msusuario/yape/colaborador', model); // desarrollo
+          //return this.http.post('http://192.168.116.11/msusuario/yape/colaborador', model); // producción
     }
 
     registrarUsuario2(model: GanaConYAPE): void{
@@ -40,12 +36,12 @@ export class FormularioService {
     }
     
 
-    formatDate(date: Date): string {
+    formatDate(): string {
 
-      
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
+      const date: Date = new Date();
+      // const day = date.getDate();
+      // const month = date.getMonth() + 1;
+      // const year = date.getFullYear();
       const fecha = moment(date);
         
       return fecha.format('DD/MM/YYYY');
