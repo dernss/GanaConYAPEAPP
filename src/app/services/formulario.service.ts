@@ -15,13 +15,15 @@ moment.locale('es');
 })
 export class FormularioService {
 
+  private apiUrl: string;
   constructor(private http: HttpClient) {
+    this.apiUrl = environment.endpoint;
   }
 
     // http://200.37.108.23/msusuario/yape/cliente
     registrarUsuario(model: any): Observable<any>{
       //return this.http.post('http://200.37.108.23/msusuario/yape/cliente', model)
-      return this.http.post(`${environment.apiUrl}msusuario/yape/cliente`, model);
+      return this.http.post(`${this.apiUrl}msusuario/yape/cliente`, model);
   
     }
 
