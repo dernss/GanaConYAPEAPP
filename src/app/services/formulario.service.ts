@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GanaConYAPE } from '../Model/formulario';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -15,15 +15,25 @@ moment.locale('es');
 })
 export class FormularioService {
 
-  private apiUrl: string;
+  apiUrl: string;
+  private urlAPI = '/msusuario/yape/cliente';
   constructor(private http: HttpClient) {
     this.apiUrl = environment.endpoint;
   }
 
     // http://200.37.108.23/msusuario/yape/cliente
     registrarUsuario(model: any): Observable<any>{
+      //let url = `${this.urlAPI}`;
+
+      let httpHeaders = new HttpHeaders()
+                         .set('Access-Control-Allow-Origin', '*');
+    
       //return this.http.post('http://200.37.108.23/msusuario/yape/cliente', model)
-      return this.http.post(`${this.apiUrl}msusuario/yape/cliente`, model);
+      return this.http.post(`${this.apiUrl}msusuario/yape/cliente`, model, {
+        headers: httpHeaders,
+        responseType: 'json'
+      });
+      //return this.http.post(url, model);
   
     }
 

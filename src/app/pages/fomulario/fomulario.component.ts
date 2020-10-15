@@ -147,6 +147,7 @@ onSubmit(): void{
   this.jsonService.colaborador.tipoDocumento = 1 ;
   this.jsonService.cliente = this.cliente.value;
   this.jsonService.cliente.tipoDocumento = 1 ;
+  this.jsonService.cliente.recaptchaResponse = this.captcha; // captcha
 
 
   this.colaborador.value.fechaEmision = this.formularioService.formatDate();
@@ -165,7 +166,7 @@ onSubmit(): void{
               allowOutsideClick: false
              })
   )
-  // console.log(this.jsonService);
+   //console.log(this.jsonService);
 
   this.colaborador.setValue({
     numeroDocumento: "",

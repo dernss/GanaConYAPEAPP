@@ -4,8 +4,9 @@
 
 export const environment = {
   production: true,
-  endpoint: 'http://200.37.108.23/', // esto es un API no un endpoint
-  //apiUrl: 'https://appcajacusco.cmac-cusco.com.pe/', // tengo que enviar esta  si pero no es api p
+  endpoint: 'https://appcajacusco.cmac-cusco.com.pe/', // 
+  //apiUrl: 'https://appcajacusco.cmac-cusco.com.pe/', // 
+  //apiUrl: 'http://200.37.108.23/', // 
 
 };
 
