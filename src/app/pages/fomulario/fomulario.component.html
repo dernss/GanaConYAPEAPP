@@ -143,7 +143,8 @@
                                 <br>
 
                                 <div>
-                                    <button mat-raised-button color="primary" Name="btnenviar" (click)="onSubmit()" [disabled]=" cliente.invalid || colaborador.invalid ||!captchavalido ">ENVIAR</button>
+                                    <!-- <button mat-raised-button color="primary" Name="btnenviar" (click)="onSubmit()" [disabled]=" cliente.invalid || colaborador.invalid ||!captchavalido ">ENVIAR</button> NRDE 27/10/2020 se comenta evento clic en boton-->
+                                    <button mat-raised-button color="primary" Name="btnenviar" [disabled]=" cliente.invalid || colaborador.invalid ||!captchavalido ">ENVIAR</button>
                                 </div>
                                 <div class="row mt-4" *ngIf="cliente.invalid || colaborador.invalid ">
                                     <div class="col text-left">
